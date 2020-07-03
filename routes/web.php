@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,9 +32,17 @@ Route::get('/checkout/success','HomeController@success')->name('checkout.success
 // Orders
 Route::get('/orders','HomeController@orders')->name('orders');
 
-
-
-
+// Admin
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
+
+// Authentification
+Auth::routes();
+
+Route::get('/logout', function(){
+    Auth::logout();
+    Session()->flush();
+
+    return redirect('/');
+})->name('logout');

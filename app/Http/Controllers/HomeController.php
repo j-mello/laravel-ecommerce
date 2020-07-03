@@ -3,10 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Product;
-
-use function GuzzleHttp\Promise\all;
 
 class HomeController extends Controller
 {
