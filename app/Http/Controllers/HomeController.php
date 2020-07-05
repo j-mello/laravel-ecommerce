@@ -21,16 +21,6 @@ class HomeController extends Controller
         return view('contact');
     }
 
-    public function checkout()
-    {
-        return view('checkout');
-    }
-
-    public function success()
-    {
-        return view('success');
-    }
-
     public function orders()
     {
         return view('orders');
