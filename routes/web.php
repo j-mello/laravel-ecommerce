@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\SaveController;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 
@@ -23,7 +25,15 @@ Route::get('/shop','ShopController@index')->name('shop.index');
 Route::get('/shop/{product}','ShopController@show')->name('shop.show');
 
 // Cart
-Route::get('/cart','HomeController@cart')->name('cart.index');
+Route::get('/cart','CartController@index')->name('cart.index');
+Route::post('/cart','CartController@store')->name('cart.store');
+Route::delete('/cart/{product}','CartController@destroy')->name('cart.destroy');
+Route::post('/cart/{product}/save','CartController@save')->name('cart.save');
+Route::get('/cart/reset','CartController@reset')->name('cart.reset'); // Utilisé uniquement pour le dev
+
+// Save
+Route::delete('/save/{product}','SaveController@destroy')->name('save.destroy');
+Route::post('/save/{product}/cart','SaveController@store')->name('save.store');
 
 //Payment
 Route::get('/checkout','HomeController@checkout')->name('checkout.index');
