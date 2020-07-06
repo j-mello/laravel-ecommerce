@@ -31,7 +31,7 @@ class CheckoutController extends Controller
                 "receipt_email" => $request->email,
                 "metadata" => [
                     'owner' => $request->name,
-                    'product'=> Cart::content()->toJson()
+                    //'product'=> Cart::content()->toJson()
                 ]
             ]);
             //dd($charge);
