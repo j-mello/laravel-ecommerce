@@ -27,7 +27,7 @@
                         @foreach ($categories as $category)
 						<li class="main-nav-list"><a data-toggle="collapse" href="#fruitsVegetable" aria-expanded="false" aria-controls="fruitsVegetable"><span
                             class="lnr lnr-arrow-right"></span>
-                        {{ $category->name }} <span class='number'>({{ count($category->products) }})</span>
+                            {{ $category->name }} <span class='number'>({{ count($category->products) }})</span>
                         @endforeach
 							</ul>
 						</li>

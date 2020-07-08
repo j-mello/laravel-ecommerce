@@ -46,7 +46,7 @@ Route::delete('/coupon', 'CouponsController@destroy')->name('coupon.destroy');
 
 
 // Orders
-Route::get('/orders','HomeController@orders')->name('orders');
+Route::get('/orders','HomeController@orders')->name('orders')->middleware('auth');
 
 // Admin
 Route::group(['prefix' => 'admin'], function () {

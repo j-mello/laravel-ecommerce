@@ -21,14 +21,15 @@
     <div class='container my-5'>
         <div class='orders'>
             <h2 class='text-center'>Order Details</h2>
+            @foreach($orders as $order)
             <div class='table-responsive order_details_table'>
                 <div class='d-flex justify-content-between my-5 px-5'>
                     <h4>
                     <i class='fas fa-receipt'></i>
-                    Order #523
+                    Order #{{ $order->id }}
                     </h4>
                     <h4>
-                    Date : 28/26/2020
+                    Date : {{ $order->created_at }}
                     </h4>
                 </div>
                 <table class='table'>
@@ -40,29 +41,22 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach($order->products as $product)
                         <tr>
-                            <td>Product name</td>
-                            <td>x 2</td>
-                            <td>$ 10</td>
+                            <td>{{ $product->name }}</td>
+                            <td>x {{ $product->pivot->quantity }}</td>
+                            <td>€ {{ round($product->price * $product->pivot->quantity, 2) }}</td>
                         </tr>
+                        @endforeach
                         <tr>
-                            <td><b>Subtotal</b></td>
+                            <td><b>Total (Tax included)</b></td>
                             <td></td>
-                            <td>$ 10</td>
-                        </tr>
-                        <tr>
-                            <td><b>Tax</b></td>
-                            <td></td>
-                            <td>$ 0.50</td>
-                        </tr>
-                        <tr>
-                            <td><b>Total</b></td>
-                            <td></td>
-                            <td>$ 10.50</td>
+                        <td>€ {{ round($order->payment_total, 2) }}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
+            @endforeach
         </div>
 
     </div>

@@ -33,10 +33,10 @@
 					<div class="details_item">
 						<h4>Order Info</h4>
 						<ul class="list">
-							<li><a href="#"><span>Order number</span> : 60235</a></li>
-							<li><a href="#"><span>Date</span> : Los Angeles</a></li>
-							<li><a href="#"><span>Total</span> : USD 2210</a></li>
-							<li><a href="#"><span>Payment method</span> : Check payments</a></li>
+							<li><a href="#"><span>Command order</span> : {{ $order->id }}</a></li>
+							<li><a href="#"><span>Date</span> : {{ $order->created_at }}</a></li>
+                            <li><a href="#"><span>Total</span> : EUR {{ round($order->payment_total, 2) }}</a></li>
+							<li><a href="#"><span>Payment method</span> : Stripe</a></li>
 						</ul>
 					</div>
 				</div>
@@ -44,25 +44,24 @@
 					<div class="details_item">
 						<h4>Billing Address</h4>
 						<ul class="list">
-							<li><a href="#"><span>Street</span> : 56/8</a></li>
-							<li><a href="#"><span>City</span> : Los Angeles</a></li>
-							<li><a href="#"><span>Country</span> : United States</a></li>
-							<li><a href="#"><span>Postcode </span> : 36952</a></li>
+							<li><a href="#"><span>Address</span> : {{ $order->payment_address }}</a></li>
+							<li><a href="#"><span>City</span> : {{ $order->payment_city }}</a></li>
+                            <li><a href="#"><span>Zipcode </span> : {{ $order->payment_postcode }}</a></li>
+                            <li><a href="#"><span>Email</span> : {{ $order->payment_email }}</a></li>
 						</ul>
 					</div>
-				</div>
-				<div class="col-lg-4">
+                </div>
+                <div class="col-lg-4">
 					<div class="details_item">
-						<h4>Shipping Address</h4>
+						<h4>Billing Address</h4>
 						<ul class="list">
-							<li><a href="#"><span>Street</span> : 56/8</a></li>
-							<li><a href="#"><span>City</span> : Los Angeles</a></li>
-							<li><a href="#"><span>Country</span> : United States</a></li>
-							<li><a href="#"><span>Postcode </span> : 36952</a></li>
+							<li><a href="#"><span>Address</span> : {{ $order->payment_address }}</a></li>
+							<li><a href="#"><span>City</span> : {{ $order->payment_city }}</a></li>
+                            <li><a href="#"><span>Zipcode </span> : {{ $order->payment_postcode }}</a></li>
+                            <li><a href="#"><span>Email</span> : {{ $order->payment_email }}</a></li>
 						</ul>
 					</div>
-				</div>
-			</div>
+                </div>
 			<div class="order_details_table">
 				<h2>Order Details</h2>
 				<div class="table-responsive">
@@ -75,61 +74,19 @@
 							</tr>
 						</thead>
 						<tbody>
+                            @foreach($order->products as $product)
 							<tr>
 								<td>
-									<p>Pixelstore fresh Blackberry</p>
+									<p>{{ $product->name }}</p>
 								</td>
 								<td>
-									<h5>x 02</h5>
+									<h5>x {{ $product->pivot->quantity }}</h5>
 								</td>
 								<td>
-									<p>$720.00</p>
+									<p>€ {{ round($product->price * $product->pivot->quantity, 2) }}</p>
 								</td>
-							</tr>
-							<tr>
-								<td>
-									<p>Pixelstore fresh Blackberry</p>
-								</td>
-								<td>
-									<h5>x 02</h5>
-								</td>
-								<td>
-									<p>$720.00</p>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<p>Pixelstore fresh Blackberry</p>
-								</td>
-								<td>
-									<h5>x 02</h5>
-								</td>
-								<td>
-									<p>$720.00</p>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<h4>Subtotal</h4>
-								</td>
-								<td>
-									<h5></h5>
-								</td>
-								<td>
-									<p>$2160.00</p>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<h4>Shipping</h4>
-								</td>
-								<td>
-									<h5></h5>
-								</td>
-								<td>
-									<p>Flat rate: $50.00</p>
-								</td>
-							</tr>
+                            </tr>
+                            @endforeach
 							<tr>
 								<td>
 									<h4>Total</h4>
@@ -138,7 +95,7 @@
 									<h5></h5>
 								</td>
 								<td>
-									<p>$2210.00</p>
+									<p>€ {{ $order->payment_total }}</p>
 								</td>
 							</tr>
 						</tbody>
