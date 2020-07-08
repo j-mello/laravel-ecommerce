@@ -59,7 +59,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <h5>$ {{ $product->price }}</h5>
+                                    <h5>€ {{ $product->price }}</h5>
                                 </td>
                                 <td>
                                     <div class="product_count">
@@ -141,7 +141,7 @@
                                     <div class='product-details'>
                                         <h6>{{ $product->model->name }}</h6>
                                         <div class='price'>
-                                            <h6>$ {{ $product->model->price }}</h6>
+                                            <h6>€ {{ $product->model->price }}</h6>
                                         </div>
                                         <div class='prd-button'>
                                             <form action="{{ route('save.destroy', $product->rowId) }}" method="POST">

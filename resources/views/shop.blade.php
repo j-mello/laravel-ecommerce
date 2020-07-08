@@ -71,7 +71,7 @@
                                     <h6>{{ $product->name }}</h6>
                                     <p>{{ $product->details }}</p>
 									<div class="price">
-										<h6>${{ $product->price }}</h6>
+										<h6>€{{ $product->price }}</h6>
 									</div>
                                     <div class="prd-bottom d-flex justify-content-around">
                                         <form action="{{ route('cart.store') }}" method="POST">
