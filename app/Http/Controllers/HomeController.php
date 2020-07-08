@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\OrderProduct;
 use Illuminate\Http\Request;
 use App\Product;
 
@@ -10,9 +11,15 @@ class HomeController extends Controller
 
     public function home()
     {
-        $products = Product::inRandomOrder()->take(8)->get();
+        // New product
+        $news = Product::take(2)->get();
+
+        // Last product
+        $latestProducts = Product::orderby('id', 'DESC')->take(8)->get();
+
         return view('home',[
-            'products' => $products,
+            'latestProducts' => $latestProducts,
+            'news' => $news,
         ]);
     }
 

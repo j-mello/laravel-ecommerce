@@ -27,7 +27,9 @@
                         @foreach ($categories as $category)
 						<li class="main-nav-list"><a data-toggle="collapse" href="#fruitsVegetable" aria-expanded="false" aria-controls="fruitsVegetable"><span
                             class="lnr lnr-arrow-right"></span>
+                        <a href="{{ route('shop.index', ['category' => $category->slug]) }}">
                             {{ $category->name }} <span class='number'>({{ count($category->products) }})</span>
+                        </a>
                         @endforeach
 							</ul>
 						</li>

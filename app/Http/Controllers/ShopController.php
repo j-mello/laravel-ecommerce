@@ -15,7 +15,14 @@ class ShopController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        if(request()->category){
+            $category = Category::where('slug', request()->category)->firstOrFail();
+            $products = Product::where('category_id', $category->id)->get();
+        }
+        else {
+            $products = Product::all();
+        }
+
         $categories = Category::all();
         return view('shop', [
             "products" => $products,
@@ -35,39 +42,5 @@ class ShopController extends Controller
         return view('product',[
             'product' => $product,
         ]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }
