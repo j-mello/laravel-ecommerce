@@ -73,25 +73,20 @@
 									<div class="price">
 										<h6>${{ $product->price }}</h6>
 									</div>
-									<div class="prd-bottom">
-
-										<a href="" class="social-info">
-											<span class="ti-bag"></span>
-											<p class="hover-text">add to bag</p>
-										</a>
-										<a href="" class="social-info">
-											<span class="lnr lnr-heart"></span>
-											<p class="hover-text">Wishlist</p>
-										</a>
-										<a href="" class="social-info">
-											<span class="lnr lnr-sync"></span>
-											<p class="hover-text">compare</p>
-										</a>
-										<a href="" class="social-info">
-											<span class="lnr lnr-move"></span>
-											<p class="hover-text">view more</p>
-										</a>
-									</div>
+                                    <div class="prd-bottom d-flex justify-content-around">
+                                        <form action="{{ route('cart.store') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="id" value="{{ $product->id }}">
+                                            <input type="hidden" name="name" value="{{ $product->name }}">
+                                            <input type="hidden" name="price" value="{{ $product->price }}">
+                                            <button type="submit" class='primary-btn'>
+                                                <i class="fas fa-plus"></i>
+                                            </button>
+                                        </form>
+                                        <a href="{{ route('shop.show', $product->slug) }}" class='primary-btn'>
+                                            <i class='fas fa-eye'></i>
+                                        </a>
+                                    </div>
 								</div>
 							</div>
                         </div>
